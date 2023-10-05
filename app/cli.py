@@ -33,3 +33,11 @@ def register(app):
         """Compile all languages."""
         if os.system('pybabel compile -d app/translations'):
             raise RuntimeError('compile command failed')
+
+    @app.cli.group()
+    def start():
+        pass
+
+    @start.command()
+    def smtp():
+        os.system('python -m smtpd -n -c DebuggingServer localhost:8025')
